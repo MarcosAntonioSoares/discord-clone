@@ -6,7 +6,7 @@ import "@uploadthing/react/styles.css";
 
 import Image from "next/image";
 
-import { X } from "lucide-react";
+import { FileIcon, X } from "lucide-react";
 
 interface FileUploadProps {
   onChange: (url?: string) => void;
@@ -24,6 +24,29 @@ export function FileUpload({ onChange, value, endpoint }: FileUploadProps) {
         <button
           onChange={() => onChange("")}
           className='absolute right-0 top-0 rounded-full bg-rose-500 p-1 text-white shadow-sm'
+          type='button'
+        >
+          <X className='h-4 w-4' />
+        </button>
+      </div>
+    );
+  }
+
+  if (value && fileType === "pdf") {
+    return (
+      <div className='relative flex items-center p-2 mt-2 rounded-md bg-background/10'>
+        <FileIcon className='h-10 w-10 fill-indigo-200 stroke-indigo-400' />
+        <a
+          href={value}
+          target='_blank'
+          rel='noopener noreferrer'
+          className='ml-2 text-indigo-500 dark:text-indigo-400 hover:underline'
+        >
+          {value}
+        </a>
+        <button
+          onChange={() => onChange("")}
+          className='absolute -right-2 -top-2 rounded-full bg-rose-500 p-1 text-white shadow-sm'
           type='button'
         >
           <X className='h-4 w-4' />

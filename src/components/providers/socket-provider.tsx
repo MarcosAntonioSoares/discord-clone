@@ -32,17 +32,17 @@ export function SocketProvider({ children }: { children: ReactNode }) {
     const socketInstance = new (ClientIO as any)(
       process.env.NEXT_PUBLIC_SITE_URL!,
       {
-        path: "/socket/io",
+        path: "/api/socket/io",
         addTrailingSlash: false,
       }
     );
 
     socketInstance.on("connect", () => {
-      setIsConnected(false);
+      setIsConnected(true);
     });
 
     socketInstance.on("disconnect", () => {
-      setIsConnected(true);
+      setIsConnected(false);
     });
 
     setSocket(socketInstance);

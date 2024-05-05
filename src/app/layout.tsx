@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
 
 import { ModalProvider } from "@/components/providers/modal-providet";
+import { Queryprovider } from "@/components/providers/query-provider";
 import { SocketProvider } from "@/components/providers/socket-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 
@@ -35,7 +36,7 @@ export default function RootLayout({
           >
             <SocketProvider>
               <ModalProvider />
-              {children}
+              <Queryprovider>{children}</Queryprovider>
             </SocketProvider>
           </ThemeProvider>
         </body>

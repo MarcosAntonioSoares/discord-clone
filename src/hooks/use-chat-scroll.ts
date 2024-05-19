@@ -34,4 +34,30 @@ export function useChatScroll({
       topDiv?.removeEventListener("scroll", handleScroll);
     };
   }, [shouldLoadMore, loadMore, chatRef]);
+
+  useEffect(() => {
+    const bottomDiv = bottomRef?.current;
+    const topDiv = chatRef?.current;
+
+    function shouldAutoScroll() {
+      if (!hasInitialized && bottomDiv) {
+        setHasInitialized(true);
+        return true;
+      }
+
+      if (!topDiv) {
+        return false;
+      }
+
+      const distanceFromBottom =
+        topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
+      return distanceFromBottom;
+    }
+
+    if (shouldAutoScroll()) {
+      bottomRef.current?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }, [bottomRef, chatRef, count, hasInitialized]);
 }

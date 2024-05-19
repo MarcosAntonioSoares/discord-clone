@@ -1,8 +1,8 @@
 import { NextApiRequest } from "next";
 
-import { currentProfilePages } from "../../../lib/current-profile-pages";
-import { db } from "../../../lib/db";
-import { NextApiResponseServerIo } from "../../../types";
+import { currentProfilePages } from "../../../../lib/current-profile-pages";
+import { db } from "../../../../lib/db";
+import { NextApiResponseServerIo } from "../../../../types";
 
 export default async function handler(
   req: NextApiRequest,
@@ -48,7 +48,7 @@ export default async function handler(
     });
 
     if (!server) {
-      return res.status(400).json({ message: "Server not found" });
+      return res.status(404).json({ message: "Server not found" });
     }
 
     const channel = await db.channel.findFirst({
@@ -59,7 +59,7 @@ export default async function handler(
     });
 
     if (!channel) {
-      return res.status(400).json({ message: "Channel not found" });
+      return res.status(404).json({ message: "Channel not found" });
     }
 
     const member = server.members.find(
@@ -67,7 +67,7 @@ export default async function handler(
     );
 
     if (!member) {
-      return res.status(400).json({ message: "Member not found" });
+      return res.status(404).json({ message: "Member not found" });
     }
 
     const message = await db.message.create({

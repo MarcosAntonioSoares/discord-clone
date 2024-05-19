@@ -31,8 +31,10 @@ export function useChatQuery({
     );
 
     const res = await fetch(url);
+    console.log(res);
     return res.json();
   }
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery({
       queryKey: [queryKey],
